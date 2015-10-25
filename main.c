@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static const int NUM_NUMS = 10000;
-static const char INPUT_FILE[] = "./tests/coursera_sample.txt";
-int debug = 0;
+static const int NUM_NUMS = 100000;
+static const char INPUT_FILE[] = "./tests/test100.txt";
+int debug = 1;
 long numCompare = 0;
 
 int quicksort(int* arr, int n);
@@ -13,6 +13,7 @@ int main() {
     char line[80];
     int *arr = malloc(sizeof(int) * NUM_NUMS);
     long i = 0;
+    int j;
     FILE  *fr;
 
     fr = fopen(INPUT_FILE, "rt");
@@ -34,14 +35,15 @@ int main() {
         }
     }
 
-    printf("Done reading file.\n");
+    printf("Done reading file. i = %ld\n", i);
 
-    quicksort(arr, NUM_NUMS);
+    quicksort(arr, i);
 
     if(debug) {
-        printf("arr: [");
-        for(i=0; i<NUM_NUMS; i++) {
-            printf("%d ", *(arr+i));
+        int wholeOrPart = i < 25 ? i : 25;
+        printf("arr of %d: [ ", wholeOrPart);
+        for(j=0; j<wholeOrPart; j++) {
+            printf("%d ", *(arr+j));
         }
         printf("]\n");
     }
